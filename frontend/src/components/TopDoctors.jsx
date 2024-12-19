@@ -13,7 +13,7 @@ const TopDoctors = () => {
         Our top doctors are highly skilled and dedicated to providing the best
         care possible.
       </p>
-      <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm-px-0">
+      <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-4 pt-5 gap-y-6 px-3 sm:px-0">
         {doctors.slice(0, 10).map((item, index) => (
           <div
             onClick={() => navigate(`/appointment/${item._id}`)}
