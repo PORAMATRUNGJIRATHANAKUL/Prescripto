@@ -9,6 +9,12 @@ const Navbar = () => {
 
   const [showMenu, setShowMenu] = useState(false);
   const [token, setToken] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log("Searching for:", searchQuery);
+  };
 
   return (
     <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-gray-400">
@@ -37,6 +43,34 @@ const Navbar = () => {
         </NavLink>
       </ul>
       <div className="flex items-center gap-4">
+        <form onSubmit={handleSearch} className="hidden md:flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:border-primary"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 bg-primary text-white rounded-r-full hover:bg-primary/90"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+        </form>
         {token ? (
           <div className="flex items-center gap-2 cursor-pointer group relative">
             <img className="w-8 rounded-full" src={assets.profile_pic} alt="" />
