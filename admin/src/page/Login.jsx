@@ -15,7 +15,7 @@ const Login = () => {
     event.preventDefault();
     try {
       if (state === "Admin") {
-        const { data } = await axios.post(backendUrl + "/api/admin/login", {
+        const { data } = await axios.post(`${backendUrl}/api/admin/login`, {
           email,
           password,
         });
@@ -24,6 +24,7 @@ const Login = () => {
           setAToken(data.token);
         }
       } else {
+        toast.error("data.message");
       }
     } catch (error) {}
   };
