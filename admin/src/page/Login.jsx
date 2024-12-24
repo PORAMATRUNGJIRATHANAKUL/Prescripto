@@ -2,9 +2,10 @@ import React, { useState, useContext } from "react";
 import { assets } from "../assets/assets.js";
 import axios from "axios";
 import { AdminContext } from "../context/AdminContext.jsx";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const [state, setState] = useState(" Admin ");
+  const [state, setState] = useState("Admin");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,18 +16,23 @@ const Login = () => {
     event.preventDefault();
     try {
       if (state === "Admin") {
-        const { data } = await axios.post(`${backendUrl}/api/admin/login`, {
+        const { data } = await axios.post(backendUrl + "/api/admin/login", {
           email,
           password,
         });
         if (data.success) {
           localStorage.setItem("aToken", data.token);
           setAToken(data.token);
+          toast.success(data.message);
+        } else {
+          toast.error(data.message);
         }
       } else {
-        toast.error("data.message");
+        toast.error("Invalid login type");
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed");
+    }
   };
   return (
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
