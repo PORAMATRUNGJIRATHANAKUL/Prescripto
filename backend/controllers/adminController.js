@@ -71,6 +71,7 @@ const addDoctor = async (req, res) => {
       experience,
       fees,
       address: JSON.parse(address),
+      available,
       date: Date.now(),
     };
     const newDoctor = await doctorModel(doctordata);
